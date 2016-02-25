@@ -1,3 +1,17 @@
+
+#nios2
+#######################################################
+#export ARCH=nios
+#export HOST_PARAM="--host=nios2-linux --disable-shared --without-png"
+#export TARGET_CC=nios2-linux-gcc
+#export PATH=/opt/nios2/bin/:$PATH
+
+#PC emulate cross build.
+#######################################################
+#export ARCH=x86
+#export HOST_PARAM=
+#export TARGET_CC=gcc
+
 #broncho 1900
 #######################################################
 #export ARCH=arm
@@ -7,11 +21,11 @@
 
 #sh
 #######################################################
-export ARCH=sh4
-export HOST_PARAM=--host=sh4-linux
-export TARGET_CC=sh4-linux-gcc
-export PATH=/opt/STM/STLinux-2.3/devkit/sh4/bin/:$PATH
-export TARGET_CFLAGS="-DFTK_FONT_SIZE=32"
+#export ARCH=sh4
+#export HOST_PARAM=--host=sh4-linux
+#export TARGET_CC=sh4-linux-gcc
+#export PATH=/opt/STM/STLinux-2.3/devkit/sh4/bin/:$PATH
+#export TARGET_CFLAGS="-DFTK_FONT_SIZE=32"
 
 #openmoko
 #######################################################
@@ -52,10 +66,11 @@ export TARGET_CFLAGS="-DFTK_FONT_SIZE=32"
 
 #codesourery
 #######################################################
-#export ARCH=arm
-#export HOST_PARAM=--host=arm-none-linux-gnueabi
-#export TARGET_CC=arm-none-linux-gnueabi-gcc
-#export PATH=/root/CodeSourcery/Sourcery_G++_Lite/bin/:$PATH
+export ARCH=arm
+export HOST_PARAM=--host=arm-none-linux-gnueabi
+export TARGET_CC=arm-none-linux-gnueabi-gcc
+export TARGET_CFLAGS="-march=armv4t -mtune=arm920t"
+export PATH=/home/colin/opt/SoureryCodeBench/bin/:$PATH
 
 #sigma, 
 # maybe you need change the path.
@@ -70,16 +85,17 @@ export TARGET_CFLAGS="-DFTK_FONT_SIZE=32"
 #export SIGMA_LIBS="-L$RUA_DIR/lib -Xlinker --start-group -ldcc -lrmmonitoring -lrmvdemux -lrmjpeg -lrmungif -lrmpng -lrmzlib -lrmhttp -lrmscc -lrmavicore -lrmmp4api -lrmmp4 -lrmmp4core -lrmdescriptordecoder -lrmmpeg4framework -lrmrtk86 -lrmwmaprodecoder -lrmwmaprodecodercore -lrmasfdemux -lrmasfdemuxcore -lrmstreamingprotocols -lrmcpputils -lrmcapture -lrmcw -lrmcore -lrmcdfs -lrua -lllad -lrmdtcpinterface -lrmdemuxwritekeyapi -lrmsoftmixer -lrmwmdrmndstub -lgbus -lrmdrm -Xlinker --end-group  -ldl -rdynamic"
 
 export BUILD_DIR=$PWD/$ARCH
-export PREFIX=/opt/ftk-$ARCH
+export PREFIX=/home/colin/opt/ftk-$ARCH
 export STAGING=${BUILD_DIR}/staging
 export DIST=${BUILD_DIR}/dist
 export PKG_CONFIG_PATH=${STAGING}/${PREFIX}/lib/pkgconfig/
-export LDFLAGS="-L${STAGING}/${PREFIX}/lib -Wl,-rpath -Wl,${PREFIX}/lib"
+export LDFLAGS="-L${STAGING}/${PREFIX}/lib -march=armv4t -mtune=arm920t -Wl,-rpath -Wl,${PREFIX}/lib"
 export CPPFLAGS="-I${STAGING}/${PREFIX}/include $TARGET_CFLAGS"
 export CFLAGS=$CPPFLAGS 
 export CXXFLAGS=$CPPFLAGS
 export DIRS="--libdir=${STAGING}/lib --includedir=${STAGING}/include"
-#export CAIRO=cairo
-#export TSLIB=tslib
-export FTK_CONF_OPTION="--disable-cairo --disable-tslib --disable-profile --with-fontengine=freetype"
+export CAIRO=cairo
+export TSLIB=tslib
+export FTK_CONF_OPTION="--disable-profile"
+#export FTK_CONF_OPTION="--disable-cairo --disable-tslib --disable-profile --with-fontengine=freetype"
 
